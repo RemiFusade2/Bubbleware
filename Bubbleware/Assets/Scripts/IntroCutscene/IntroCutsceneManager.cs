@@ -32,6 +32,7 @@ public class IntroCutsceneManager : MonoBehaviour
 
         if (visibleImageIndex < imagesList.Count-1)
         {
+            imagesList[visibleImageIndex].GetComponent<Image>().enabled = false;
             visibleImageIndex++;
             imagesList[visibleImageIndex].GetComponent<Image>().enabled = true;
             StartCoroutine(PlayCutsceneAsync(delayBetweenImages));

@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
     public TMP_Text player1ScoreText;
     public TMP_Text player2ScoreText;
 
+    public TMP_Text targetScoreText;
+
+    public TimerManager timerManager;
+
     [Header("Settings")]
     public int targetScore = 5;
 
@@ -33,17 +37,20 @@ public class GameManager : MonoBehaviour
     {
         player1Score = 0;
         player2Score = 0;
+        timerManager.displayPlayerWinsPanel = -1;
         DisplayScores();
     }
 
     public void PlayerOneWon()
     {
         player1Score++;
+        timerManager.displayPlayerWinsPanel = 1;
         DisplayScores();
     }
     public void PlayerTwoWon()
     {
         player2Score++;
+        timerManager.displayPlayerWinsPanel = 2;
         DisplayScores();
     }
 
@@ -51,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         player1ScoreText.text = $"P1\n{player1Score}";
         player2ScoreText.text = $"P2\n{player2Score}";
+        targetScoreText.text = $"{targetScore} point to win";
     }
 
     public bool IsGameOver()

@@ -28,6 +28,8 @@ public class MySceneManager : MonoBehaviour
 
     private List<Scene> MiniGamesSceneList;
 
+    private int lastMiniGamePlayedIndex;
+
     void Awake()
     {
         // Does another instance already exist?
@@ -147,6 +149,7 @@ public class MySceneManager : MonoBehaviour
     public void ShowTitleScreen()
     {
         HideAllScenes();
+        lastMiniGamePlayedIndex = -1;
         SetAllObjectsInSceneActive(TitleScreen, true);
     }
 
@@ -203,7 +206,12 @@ public class MySceneManager : MonoBehaviour
         HideAllScenes();
 
         // Pick mini game
-        Scene MiniGame = MiniGamesSceneList[UnityEngine.Random.Range(0 , MiniGamesSceneList.Count)];
+        int miniGameIndex;
+        do {
+            miniGameIndex = UnityEngine.Random.Range(0, MiniGamesSceneList.Count);
+        } while (miniGameIndex == lastMiniGamePlayedIndex);
+        lastMiniGamePlayedIndex = miniGameIndex;
+        Scene MiniGame = MiniGamesSceneList[miniGameIndex];
         SetAllObjectsInSceneActive(MiniGame, true);
     }
 }

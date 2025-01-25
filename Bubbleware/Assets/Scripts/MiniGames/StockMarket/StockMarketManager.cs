@@ -11,7 +11,6 @@ public class StockMarketManager : MonoBehaviour
     public GameObject startPanel;
     public TMP_Text p1ScoreText;
     public TMP_Text p2ScoreText;
-    public TMP_Text winnerText;
     [Space]
     public GameObject followStockMarketValueObject;
     public ParticleSystem buyParticleSystem;
@@ -38,7 +37,7 @@ public class StockMarketManager : MonoBehaviour
 
     private void OnEnable()
     {
-        winnerText.text = "";
+        buyVisualEffect.Stop();
         InitializeLine();
         InitializeScores();
         startPanel.SetActive(true);
@@ -67,10 +66,10 @@ public class StockMarketManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         AddRandomValue(delayBetweenNewValues);
-        if (gameIsRunning)
-        {
+        /*if (gameIsRunning)
+        {*/
             StartCoroutine(AddRandomValueAsync(delayBetweenNewValues));
-        }
+        //}
     }
 
     private void InitializeLine()
@@ -127,7 +126,7 @@ public class StockMarketManager : MonoBehaviour
 
     public void P1Sell(Transform playerTransform)
     {
-        if (p1Score == 0)
+        if (gameIsRunning)
         {
             buyVisualEffect.Play();
             p1Score = lastValue;
@@ -136,7 +135,7 @@ public class StockMarketManager : MonoBehaviour
     }
     public void P2Sell(Transform playerTransform)
     {
-        if (p2Score == 0)
+        if (gameIsRunning)
         {
             buyVisualEffect.Play();
             p2Score = lastValue;
@@ -150,20 +149,6 @@ public class StockMarketManager : MonoBehaviour
 
         // stop game
         gameIsRunning = false;
-
-        // show winner
-        if (p1Score > p2Score)
-        {
-            winnerText.text = "Player 1 wins!";
-        }
-        else if (p2Score > p1Score)
-        {
-            winnerText.text = "Player 2 wins!";
-        }
-        else
-        {
-            winnerText.text = "It's a tie";
-        }
 
         // close game
         StartCoroutine(CloseTheGameAsync(1.0f));
