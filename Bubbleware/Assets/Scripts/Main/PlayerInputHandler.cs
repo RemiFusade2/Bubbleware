@@ -8,6 +8,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     private Transform playerTransform;
 
+    private Vector2 moveVector;
+
     private void FindPlayerTransform()
     {
         if (playerTransform == null)
@@ -38,16 +40,18 @@ public class PlayerInputHandler : MonoBehaviour
         FindPlayerTransform();
     }
 
+    private void FixedUpdate()
+    {
+        // Temp code to test input
+        if (playerTransform != null && !moveVector.Equals(Vector2.zero))
+        {
+            playerTransform.position += 10 * Time.fixedDeltaTime * new Vector3(moveVector.x, moveVector.y, 0);
+        }
+    }
+
     public void OnMove(CallbackContext context)
     {
-        Vector2 moveVector = context.ReadValue<Vector2>();
-
-
-        // Temp code to test input
-        if (playerTransform != null)
-        {
-            playerTransform.position += 0.2f * new Vector3(moveVector.x, moveVector.y, 0);
-        }
+        moveVector = context.ReadValue<Vector2>();
     }
 
     public void OnConfirmButtonPressed(CallbackContext context)
