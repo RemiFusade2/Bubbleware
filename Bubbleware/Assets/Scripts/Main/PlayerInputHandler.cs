@@ -6,27 +6,23 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerInput playerInput;
 
-    private Transform playerTransform;
+    private GameObject playerGameObject;
 
     private Vector2 moveVector;
 
-    private void FindPlayerTransform()
+    private void FindPlayerObject()
     {
-        if (playerTransform == null || !playerTransform.gameObject.activeInHierarchy)
+        if (playerGameObject == null || !playerGameObject.activeInHierarchy)
         {
             playerInput = GetComponent<PlayerInput>();
             int index = playerInput.playerIndex;
-            GameObject playerGameObject = GameObject.Find($"Player {index + 1}");
-            if (playerGameObject != null)
-            {
-                playerTransform = playerGameObject.transform;
-            }
+            playerGameObject = GameObject.Find($"Player {index + 1}");
         }
     }
 
     private void OnEnable()
     {
-        FindPlayerTransform();
+        FindPlayerObject();
     }
 
     private void Awake()
@@ -37,16 +33,22 @@ public class PlayerInputHandler : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        FindPlayerTransform();
+        FindPlayerObject();
     }
 
     private void FixedUpdate()
     {
+        FindPlayerObject();
+
         // Temp code to test input
-        FindPlayerTransform();
-        if (playerTransform != null && !moveVector.Equals(Vector2.zero))
+        if (playerGameObject != null && moveVector.magnitude > 0.5f)
         {
-            playerTransform.position += 10 * Time.fixedDeltaTime * new Vector3(moveVector.x, moveVector.y, 0);
+            if (playerGameObject.GetComponent<IPlayerController>() != null)
+            {
+                playerGameObject.GetComponent<IPlayerController>().Move(moveVector);
+            }
+
+            //playerGameObject.transform.position += 10 * Time.fixedDeltaTime * new Vector3(moveVector.x, moveVector.y, 0);
         }
     }
 
@@ -58,24 +60,32 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnConfirmButtonPressed(CallbackContext context)
     {
         bool confirmButtonPressed = context.ReadValueAsButton();
-
+        confirmButtonPressed = confirmButtonPressed && context.performed;
 
         // Temp code to test input
-        if (playerTransform != null)
+        if (playerGameObject != null && confirmButtonPressed)
         {
-            playerTransform.localScale = Vector3.one * (confirmButtonPressed ? 4 : 3);
+            if (playerGameObject.GetComponent<IPlayerController>() != null)
+            {
+                playerGameObject.GetComponent<IPlayerController>().OnConfirm();
+            }
+            //playerGameObject.transform.localScale = Vector3.one * (confirmButtonPressed ? 4 : 3);
         }
     }
 
     public void OnCancelButtonPressed(CallbackContext context)
     {
         bool cancelButtonPressed = context.ReadValueAsButton();
-
+        cancelButtonPressed = cancelButtonPressed && context.performed;
 
         // Temp code to test input
-        if (playerTransform != null)
+        if (playerGameObject != null && cancelButtonPressed)
         {
-            playerTransform.localScale = Vector3.one * (cancelButtonPressed ? 2 : 3);
+            if (playerGameObject.GetComponent<IPlayerController>() != null)
+            {
+                playerGameObject.GetComponent<IPlayerController>().OnCancel();
+            }
+            //playerGameObject.transform.localScale = Vector3.one * (cancelButtonPressed ? 2 : 3);
         }
     }
 }
