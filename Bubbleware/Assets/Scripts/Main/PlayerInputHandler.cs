@@ -8,11 +8,23 @@ public class PlayerInputHandler : MonoBehaviour
 
     private Transform playerTransform;
 
+    private void FindPlayerTransform()
+    {
+        if (playerTransform == null)
+        {
+            playerInput = GetComponent<PlayerInput>();
+            int index = playerInput.playerIndex;
+            GameObject playerGameObject = GameObject.Find($"Player {index + 1}");
+            if (playerGameObject != null)
+            {
+                playerTransform = playerGameObject.transform;
+            }
+        }
+    }
+
     private void OnEnable()
     {
-        playerInput = GetComponent<PlayerInput>();
-        int index = playerInput.playerIndex;
-        playerTransform = GameObject.Find($"Player {index + 1}").transform;
+        FindPlayerTransform();
     }
 
     private void Awake()
@@ -23,8 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        int index = playerInput.playerIndex;
-        playerTransform = GameObject.Find($"Player {index + 1}").transform;
+        FindPlayerTransform();
     }
 
     public void OnMove(CallbackContext context)

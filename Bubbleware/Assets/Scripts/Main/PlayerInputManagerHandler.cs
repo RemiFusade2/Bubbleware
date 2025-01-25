@@ -1,7 +1,13 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class PlayerInputManagerHandler : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        GetComponent<PlayerInputManager>().EnableJoining();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
