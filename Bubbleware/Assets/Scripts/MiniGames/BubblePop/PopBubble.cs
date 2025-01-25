@@ -1,5 +1,6 @@
 using Unity.Mathematics;
 using UnityEngine;
+using System.Collections;
 
 public class PopBubble : MonoBehaviour
 {
@@ -9,10 +10,18 @@ public class PopBubble : MonoBehaviour
     public float popRange;
 
     private float direction;
+    private Vector3 startPostition;
 
-    private void Start()
+    private void Awake()
+    {
+        startPostition = transform.position;
+    }
+
+    private void OnEnable()
     {
         direction = 1;
+        transform.position = startPostition;
+        StartCoroutine(CloseTheGameAsync(10));
     }
 
     private void Update()
@@ -31,5 +40,11 @@ public class PopBubble : MonoBehaviour
     public bool IsPoppable()
     {
         return math.abs(0 - transform.position.y) < popRange;
+    }
+
+    private IEnumerator CloseTheGameAsync(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        MySceneManager.Instance.ShowHUBScreen();
     }
 }

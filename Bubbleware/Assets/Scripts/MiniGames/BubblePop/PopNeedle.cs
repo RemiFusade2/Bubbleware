@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PopNeedle : MonoBehaviour
+public class PopNeedle : MonoBehaviour, IPlayerController
 {
     public float speed;
     public float stopX;
@@ -10,10 +10,10 @@ public class PopNeedle : MonoBehaviour
     private float currentSpeed;
     private float minX;
     private float maxX;
+    private Vector3 startPosition;
 
-    private void Start()
+    private void Awake()
     {
-        currentSpeed = 0;
         if (speed < 0)
         {
             minX = stopX;
@@ -24,14 +24,17 @@ public class PopNeedle : MonoBehaviour
             minX = transform.position.x;
             maxX = stopX;
         }
+        startPosition = transform.position;
+    }
+
+    private void OnEnable()
+    {
+        currentSpeed = 0;
+        transform.position = startPosition;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(key) && currentSpeed == 0)
-        {
-            currentSpeed = speed;
-        }
         transform.Translate(currentSpeed * Time.deltaTime, 0, 0, Space.World);
         if (transform.position.x < minX)
         {
@@ -75,5 +78,21 @@ public class PopNeedle : MonoBehaviour
             }
             MySceneManager.Instance.ShowHUBScreen();
         }
+    }
+
+    public void Move(Vector2 moveVector)
+    {
+    }
+
+    public void OnConfirm()
+    {
+        if (currentSpeed == 0)
+        {
+            currentSpeed = speed;
+        }
+    }
+
+    public void OnCancel()
+    {
     }
 }
