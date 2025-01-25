@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
 
     [Header ("Audio Mixer Groups")]
     public AudioMixerGroup m_musicMixerGroup = null;
-    public AudioMixerGroup m_sfxMixerGroup = null;
+    public AudioMixerGroup m_sfxMixerGroup;
     public AudioMixerGroup m_ambientMixerGroup = null;
 
     [Header ("Audio Sources")]
