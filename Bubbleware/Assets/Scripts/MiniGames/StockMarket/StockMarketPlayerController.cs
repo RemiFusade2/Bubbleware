@@ -9,6 +9,10 @@ public interface IPlayerController
 
 public class StockMarketPlayerController : MonoBehaviour, IPlayerController
 {
+    public StockMarketManager stockMarketManager;
+
+    public int playerID;
+
     public void Move(Vector2 moveVector)
     {
         // Do nothing
@@ -16,11 +20,25 @@ public class StockMarketPlayerController : MonoBehaviour, IPlayerController
 
     public void OnCancel()
     {
-        Debug.Log($"{this.name} SELL");
+        if (playerID == 1)
+        {
+            stockMarketManager.P1Sell();
+        }
+        else
+        {
+            stockMarketManager.P2Sell();
+        }
     }
 
     public void OnConfirm()
     {
-        Debug.Log($"{this.name} BUY");
+        if (playerID == 1)
+        {
+            stockMarketManager.P1Buy();
+        }
+        else
+        {
+            stockMarketManager.P2Buy();
+        }
     }
 }

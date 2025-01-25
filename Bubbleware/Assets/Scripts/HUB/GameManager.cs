@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerTwoWon()
     {
-        player1Score++;
+        player2Score++;
         DisplayScores();
     }
 
