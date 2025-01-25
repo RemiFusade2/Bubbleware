@@ -1477,6 +1477,7 @@ MonoBehaviour:
   MiniGamesSceneNames:
   - MiniGame_StockMarket
   - MiniGame_BubblePop
+  - MiniGame_BlowBubble
 --- !u!1 &2104249858
 GameObject:
   m_ObjectHideFlags: 0
