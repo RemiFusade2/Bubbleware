@@ -4,7 +4,6 @@ public class PopNeedle : MonoBehaviour, IPlayerController
 {
     public float speed;
     public float stopX;
-    public KeyCode key;
     public PopBubble bubble;
 
     private float currentSpeed;
@@ -68,7 +67,7 @@ public class PopNeedle : MonoBehaviour, IPlayerController
     {
         if (bubble.IsPoppable())
         {
-            if (name == "Player1")
+            if (name == "Player 1")
             {
                 GameManager.Instance.PlayerOneWon();
             }
