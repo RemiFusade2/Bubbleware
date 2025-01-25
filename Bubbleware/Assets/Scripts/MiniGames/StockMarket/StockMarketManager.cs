@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class StockMarketManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class StockMarketManager : MonoBehaviour
     public GameObject followStockMarketValueObject;
     public ParticleSystem buyParticleSystem;
     public ParticleSystem sellParticleSystem;
+    public VisualEffect buyVisualEffect;
 
     [Header("Settings")]
     public float delayBetweenNewValues = 0.1f;
@@ -149,12 +151,14 @@ public class StockMarketManager : MonoBehaviour
     public void P1Buy()
     {
         p1MarketExposure++;
-        buyParticleSystem.Emit(1);
+        buyVisualEffect.playRate += 0.1f;
+        //buyParticleSystem.Emit(1);
     }
     public void P1Sell()
     {
         p1MarketExposure--;
-        sellParticleSystem.Emit(1);
+        buyVisualEffect.playRate -= 0.1f;
+        //sellParticleSystem.Emit(1);
     }
     public void P2Buy()
     {
