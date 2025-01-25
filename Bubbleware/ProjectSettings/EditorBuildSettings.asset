@@ -14,6 +14,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MiniGame_StockMarket.unity
     guid: 076316c9ba24e074d9356921b61746f4
+  - enabled: 1
+    path: Assets/Scenes/IntroCutscene.unity
+    guid: d5f716e19edbfb049979069edc7282af
+  - enabled: 1
+    path: Assets/Scenes/OutroCutscene.unity
+    guid: fad2d7d0ec0d045478d276e7ca395595
+  - enabled: 1
+    path: Assets/Scenes/ScoreScreen.unity
+    guid: b305fa60ad9c0df4c9683a0bf0984006
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: dc92df82248c49944bd824d375d0fc74,
       type: 3}

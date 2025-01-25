@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public TMP_Text player1ScoreText;
     public TMP_Text player2ScoreText;
 
+    [Header("Settings")]
+    public int targetScore = 5;
+
     private int player1Score;
     private int player2Score;
 
@@ -48,5 +51,10 @@ public class GameManager : MonoBehaviour
     {
         player1ScoreText.text = $"Score P1: {player1Score}";
         player2ScoreText.text = $"Score P2: {player2Score}";
+    }
+
+    public bool IsGameOver()
+    {
+        return (player1Score >= targetScore || player2Score >= targetScore);
     }
 }
