@@ -16,15 +16,20 @@ public class TimerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        timer = startTime;
-        DisplayTimerText();
-        DecrementTimerCoroutine = StartCoroutine(DecrementTimerAsync(1));
+        if (GameManager.Instance.IsGameOver())
+        {
+            // Game is over, we show outro cutscene
+            MySceneManager.Instance.ShowOutroCutscene();
+        }
+        else
+        {
+            // Game is not over, we show timer
+            timer = startTime;
+            DisplayTimerText();
+            DecrementTimerCoroutine = StartCoroutine(DecrementTimerAsync(1));
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     private void DisplayTimerText()
     {
@@ -38,7 +43,7 @@ public class TimerManager : MonoBehaviour
         DisplayTimerText();
         if (timer <= 0)
         {
-            BackToTitleScreen();
+            StartNewMiniGame();
         }
         else
         {
@@ -46,8 +51,8 @@ public class TimerManager : MonoBehaviour
         }
     }
 
-    private void BackToTitleScreen()
+    private void StartNewMiniGame()
     {
-        MySceneManager.Instance.ShowTitleScreen();
+        MySceneManager.Instance.ShowRandomMiniGame();
     }
 }
