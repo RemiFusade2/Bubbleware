@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
-    public TMP_Text timerText;
+    public List<GameObject> numbersList;
 
-    public int startTime = 3;
+    public int delayBetweenNumbers = 1;
 
-    private int timer;
-
-    private Coroutine DecrementTimerCoroutine;
+    private int numberIndex;
 
     private void OnEnable()
     {
@@ -24,30 +23,38 @@ public class TimerManager : MonoBehaviour
         else
         {
             // Game is not over, we show timer
-            timer = startTime;
-            DisplayTimerText();
-            DecrementTimerCoroutine = StartCoroutine(DecrementTimerAsync(1));
+            numberIndex = 0;
+            DisplayTimer();
+            StartCoroutine(DecrementTimerAsync(delayBetweenNumbers));
         }
     }
 
-
-    private void DisplayTimerText()
+    private void HideNumbers()
     {
-        timerText.text = timer.ToString("0");
+        foreach (GameObject number in numbersList)
+        {
+            number.GetComponent<Image>().enabled = false;
+        }
+    }
+
+    private void DisplayTimer()
+    {
+        HideNumbers();
+        numbersList[numberIndex].GetComponent<Image>().enabled = true;
     }
 
     private IEnumerator DecrementTimerAsync(float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
-        timer--;
-        DisplayTimerText();
-        if (timer <= 0)
+        if (numberIndex >= numbersList.Count-1)
         {
             StartNewMiniGame();
         }
         else
         {
-            DecrementTimerCoroutine = StartCoroutine(DecrementTimerAsync(1));
+            numberIndex++;
+            DisplayTimer();
+            StartCoroutine(DecrementTimerAsync(delayBetweenNumbers));
         }
     }
 

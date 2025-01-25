@@ -13,6 +13,11 @@ public class StockMarketPlayerController : MonoBehaviour, IPlayerController
 
     public int playerID;
 
+    private void OnEnable()
+    {
+        this.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
     public void Move(Vector2 moveVector)
     {
         // Do nothing
@@ -20,6 +25,7 @@ public class StockMarketPlayerController : MonoBehaviour, IPlayerController
 
     public void OnCancel()
     {
+        /*
         if (playerID == 1)
         {
             stockMarketManager.P1Sell();
@@ -27,18 +33,20 @@ public class StockMarketPlayerController : MonoBehaviour, IPlayerController
         else
         {
             stockMarketManager.P2Sell();
-        }
+        }*/
     }
 
     public void OnConfirm()
     {
         if (playerID == 1)
         {
-            stockMarketManager.P1Buy();
+            stockMarketManager.P1Sell(this.transform);
+            this.GetComponent<SpriteRenderer>().enabled = true;
         }
         else
         {
-            stockMarketManager.P2Buy();
+            stockMarketManager.P2Sell(this.transform);
+            this.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 }

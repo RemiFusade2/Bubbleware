@@ -33,8 +33,6 @@ public class StockMarketManager : MonoBehaviour
 
     private float p1Score;
     private float p2Score;
-    private float p1MarketExposure;
-    private float p2MarketExposure;
 
     private bool gameIsRunning;
 
@@ -51,12 +49,11 @@ public class StockMarketManager : MonoBehaviour
 
     private void InitializeScores()
     {
-        p1Score = 100000;
-        p2Score = 100000;
-        p1MarketExposure = 1;
-        p2MarketExposure = 1;
+        p1Score = 0;
+        p2Score = 0;
+        /*
         p1ScoreText.text = $"P1 Portfolio:\nUS$ {p1Score.ToString("0")}";
-        p2ScoreText.text = $"P2 Portfolio:\nUS$ {p2Score.ToString("0")}";
+        p2ScoreText.text = $"P2 Portfolio:\nUS$ {p2Score.ToString("0")}";*/
     }
 
     private IEnumerator RemoveStartPanel(float delay)
@@ -70,7 +67,6 @@ public class StockMarketManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         AddRandomValue(delayBetweenNewValues);
-        IncreaseScores();
         if (gameIsRunning)
         {
             StartCoroutine(AddRandomValueAsync(delayBetweenNewValues));
@@ -82,7 +78,7 @@ public class StockMarketManager : MonoBehaviour
         positionCount = 0;
         lastTime = 0;
         lastValue = Random.Range(0, 1.0f);
-        trendMin = -0.25f;
+        trendMin = -0.22f;
         trendMax = 0.3f;
         for (int i = 0; i < 50; i++)
         {
@@ -92,16 +88,7 @@ public class StockMarketManager : MonoBehaviour
         // Bubble random changes of trend
         for (int i = 0; i < 7; i++)
         {
-            StartCoroutine(SetBubbleTrend(i, (Random.Range(-0.01f, 0.03f))));
-        }
-        for (int i = 1; i < 7; i++)
-        {
-            if (Random.Range(0, 2) % 2 != 0)
-            {
-                // Bubble bursts
-                StartCoroutine(SetBubbleTrend(Random.Range(i-0.5f, i), -Random.Range(0.2f, 0.4f)));
-                StartCoroutine(SetBubbleTrend(Random.Range(i, i+0.5f), Random.Range(0.2f, 0.4f)));
-            }
+            StartCoroutine(SetBubbleTrend(i, (Random.Range(-0.01f, 0.02f))));
         }
         // Final bubble burst
         StartCoroutine(SetBubbleTrend(Random.Range(8.5f, 9.5f), -0.4f));
@@ -138,37 +125,23 @@ public class StockMarketManager : MonoBehaviour
         followStockMarketValueObject.transform.position = new Vector3(lastTime, lastValue, 0);
     }
 
-    private void IncreaseScores()
+    public void P1Sell(Transform playerTransform)
     {
-        float deltaMarketValue = lineRenderer.GetPosition(positionCount - 1).y - lineRenderer.GetPosition(positionCount - 2).y;
-        p1Score += p1MarketExposure * deltaMarketValue * 999;
-        p2Score += p2MarketExposure * deltaMarketValue * 999;
-
-        p1ScoreText.text = $"P1 Portfolio:\nUS$ {p1Score.ToString("0")}";
-        p2ScoreText.text = $"P2 Portfolio:\nUS$ {p2Score.ToString("0")}";
+        if (p1Score == 0)
+        {
+            buyVisualEffect.Play();
+            p1Score = lastValue;
+            playerTransform.position = new Vector3(lastTime, lastValue, 0);
+        }
     }
-
-    public void P1Buy()
+    public void P2Sell(Transform playerTransform)
     {
-        p1MarketExposure++;
-        buyVisualEffect.playRate += 0.1f;
-        //buyParticleSystem.Emit(1);
-    }
-    public void P1Sell()
-    {
-        p1MarketExposure--;
-        buyVisualEffect.playRate -= 0.1f;
-        //sellParticleSystem.Emit(1);
-    }
-    public void P2Buy()
-    {
-        p2MarketExposure++;
-        buyParticleSystem.Emit(1);
-    }
-    public void P2Sell()
-    {
-        p2MarketExposure--;
-        sellParticleSystem.Emit(1);
+        if (p2Score == 0)
+        {
+            buyVisualEffect.Play();
+            p2Score = lastValue;
+            playerTransform.position = new Vector3(lastTime, lastValue, 0);
+        }
     }
 
     private IEnumerator StopTheGameAsync(float delay)

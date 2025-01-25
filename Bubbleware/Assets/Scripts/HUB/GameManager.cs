@@ -49,8 +49,8 @@ public class GameManager : MonoBehaviour
 
     private void DisplayScores()
     {
-        player1ScoreText.text = $"Score P1: {player1Score}";
-        player2ScoreText.text = $"Score P2: {player2Score}";
+        player1ScoreText.text = $"P1\n{player1Score}";
+        player2ScoreText.text = $"P2\n{player2Score}";
     }
 
     public bool IsGameOver()
