@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GamesHUB.unity
     guid: 253c3bb6dacf21749bb2e797a39f2cd6
+  - enabled: 1
+    path: Assets/Scenes/MiniGame_StockMarket.unity
+    guid: 076316c9ba24e074d9356921b61746f4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: dc92df82248c49944bd824d375d0fc74,
       type: 3}

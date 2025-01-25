@@ -14,8 +14,12 @@ public class MySceneManager : MonoBehaviour
     public string TitleScreenSceneName;
     public string GameHUBScreenSceneName;
 
+    public List<string> MiniGamesSceneNames;
+
     private Scene TitleScreen;
     private Scene GameHUBScreen;
+
+    private List<Scene> MiniGamesSceneList;
 
     void Awake()
     {
@@ -30,6 +34,8 @@ public class MySceneManager : MonoBehaviour
         // Otherwise store my reference and make me DontDestroyOnLoad
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        MiniGamesSceneList = new List<Scene>();
     }
 
     // Start is called before the first frame update
@@ -50,10 +56,21 @@ public class MySceneManager : MonoBehaviour
             SceneManager.LoadSceneAsync(TitleScreenSceneName, LoadSceneMode.Additive);
             TitleScreen = SceneManager.GetSceneByName(TitleScreenSceneName);
         }
+        GameHUBScreen = SceneManager.GetSceneByName(GameHUBScreenSceneName);
         if (GameHUBScreen == null || !GameHUBScreen.isLoaded)
         {
             SceneManager.LoadSceneAsync(GameHUBScreenSceneName, LoadSceneMode.Additive);
             GameHUBScreen = SceneManager.GetSceneByName(GameHUBScreenSceneName);
+        }
+        foreach (string miniGameSceneName in MiniGamesSceneNames)
+        {
+            Scene MiniGameScene = SceneManager.GetSceneByName(miniGameSceneName);
+            if (MiniGameScene == null || !MiniGameScene.isLoaded || !MiniGamesSceneList.Contains(MiniGameScene))
+            {
+                SceneManager.LoadSceneAsync(miniGameSceneName, LoadSceneMode.Additive);
+                MiniGameScene = SceneManager.GetSceneByName(miniGameSceneName);
+                MiniGamesSceneList.Add(MiniGameScene);
+            }
         }
         HideAllScenes();
     }
@@ -82,6 +99,17 @@ public class MySceneManager : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+        foreach (Scene MiniGameScene in MiniGamesSceneList)
+        {
+            if (MiniGameScene.isLoaded)
+            {
+                rootGameObjects = MiniGameScene.GetRootGameObjects();
+                foreach (GameObject gameObject in rootGameObjects)
+                {
+                    gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     public void ShowTitleScreen()
@@ -103,6 +131,22 @@ public class MySceneManager : MonoBehaviour
         if (GameHUBScreen.isLoaded)
         {
             GameObject[] rootGameObjects = GameHUBScreen.GetRootGameObjects();
+            foreach (GameObject gameObject in rootGameObjects)
+            {
+                gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void ShowRandomMiniGame()
+    {
+        HideAllScenes();
+
+        // Pick mini game
+        Scene MiniGame = MiniGamesSceneList[Random.Range(0 , MiniGamesSceneList.Count)];
+        if (MiniGame.isLoaded)
+        {
+            GameObject[] rootGameObjects = MiniGame.GetRootGameObjects();
             foreach (GameObject gameObject in rootGameObjects)
             {
                 gameObject.SetActive(true);

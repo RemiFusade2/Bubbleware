@@ -38,12 +38,17 @@ public class TimerManager : MonoBehaviour
         DisplayTimerText();
         if (timer <= 0)
         {
-            BackToTitleScreen();
+            StartNewMiniGame();
         }
         else
         {
             DecrementTimerCoroutine = StartCoroutine(DecrementTimerAsync(1));
         }
+    }
+
+    private void StartNewMiniGame()
+    {
+        MySceneManager.Instance.ShowRandomMiniGame();
     }
 
     private void BackToTitleScreen()
