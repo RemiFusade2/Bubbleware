@@ -12,7 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void FindPlayerTransform()
     {
-        if (playerTransform == null)
+        if (playerTransform == null || !playerTransform.gameObject.activeInHierarchy)
         {
             playerInput = GetComponent<PlayerInput>();
             int index = playerInput.playerIndex;
@@ -43,6 +43,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void FixedUpdate()
     {
         // Temp code to test input
+        FindPlayerTransform();
         if (playerTransform != null && !moveVector.Equals(Vector2.zero))
         {
             playerTransform.position += 10 * Time.fixedDeltaTime * new Vector3(moveVector.x, moveVector.y, 0);

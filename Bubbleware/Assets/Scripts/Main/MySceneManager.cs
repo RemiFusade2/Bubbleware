@@ -88,7 +88,11 @@ public class MySceneManager : MonoBehaviour
             rootGameObjects = TitleScreen.GetRootGameObjects();
             foreach (GameObject gameObject in rootGameObjects)
             {
-                gameObject.SetActive(false);
+                // Do not disable PlayerInputHandlers
+                if (gameObject.GetComponent<PlayerInputHandler>() == null)
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
         if (GameHUBScreen.isLoaded)
@@ -123,6 +127,12 @@ public class MySceneManager : MonoBehaviour
                 gameObject.SetActive(true);
             }
         }
+    }
+
+    public void StartGame()
+    {
+        GameManager.Instance.ResetScores();
+        ShowHUBScreen();
     }
 
     public void ShowHUBScreen()

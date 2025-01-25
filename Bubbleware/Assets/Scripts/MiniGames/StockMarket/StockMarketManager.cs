@@ -17,6 +17,9 @@ public class StockMarketManager : MonoBehaviour
     private IEnumerator CloseTheGameAsync(float delay)
     {
         yield return new WaitForSeconds(delay);
+
+        GameManager.Instance.PlayerOneWon();
+
         MySceneManager.Instance.ShowHUBScreen();
     }
 }
