@@ -18,7 +18,7 @@ public class BlowManager : MonoBehaviour
         {
             GameManager.Instance.PlayerOneWon();
         }
-        else
+        else if (player2.Count > player1.Count)
         {
             GameManager.Instance.PlayerTwoWon();
         }

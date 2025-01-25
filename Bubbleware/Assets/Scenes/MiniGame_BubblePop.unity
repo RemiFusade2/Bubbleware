@@ -533,7 +533,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: -50
   stopX: 0
-  key: 13
   bubble: {fileID: 1616335488}
 --- !u!4 &1351560309
 Transform:
@@ -676,6 +675,8 @@ MonoBehaviour:
   minY: -4
   maxY: 6
   popRange: 1
+  minSwitchTime: 0.5
+  maxSwitchTime: 2
 --- !u!1 &1851302938
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,7 +708,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   stopX: 0
-  key: 9
   bubble: {fileID: 1616335488}
 --- !u!4 &1851302943
 Transform:
