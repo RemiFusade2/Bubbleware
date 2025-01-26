@@ -175,6 +175,7 @@ public class StockMarketManager : MonoBehaviour
             GameManager.Instance.PlayerTwoWon();
         }
 
+        AudioManager.Instance.m_globalSfx.PlaySFX (4);
         MySceneManager.Instance.ShowHUBScreen();
     }
 }

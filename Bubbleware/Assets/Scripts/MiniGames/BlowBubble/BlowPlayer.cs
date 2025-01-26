@@ -28,7 +28,6 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
     {
         Count = 0;
         SetScale();
-        //audioPlayer = GetComponent<AudioPlayer>();
         pop.Stop();
         bubbleMesh.enabled = true;
         ended = false;
@@ -56,6 +55,7 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
         {
             bubbleMesh.enabled = false;
             pop.Play();
+            AudioManager.Instance.m_globalSfx.PlaySFX (0);
             blowManager.EndGame();
         }
     }
