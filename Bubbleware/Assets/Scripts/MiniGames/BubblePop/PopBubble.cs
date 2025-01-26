@@ -87,6 +87,7 @@ public class PopBubble : MonoBehaviour
         if (!ended)
         {
             //no winner
+            AudioManager.Instance.m_globalSfx.PlaySFX (4);
         }
         MySceneManager.Instance.ShowHUBScreen();
     }
