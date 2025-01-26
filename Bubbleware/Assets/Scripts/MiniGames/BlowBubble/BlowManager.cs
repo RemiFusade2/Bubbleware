@@ -17,15 +17,19 @@ public class BlowManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (player1.Count > player2.Count)
         {
-            GameManager.Instance.PlayerOneWon();
+            GameManager.Instance.PlayerOneWon ();
         }
         else if (player2.Count > player1.Count)
         {
-            GameManager.Instance.PlayerTwoWon();
+            GameManager.Instance.PlayerTwoWon ();
+        }
+        else
+        {
+            AudioManager.Instance.m_globalSfx.PlaySFX (4);
         }
 
-        AudioManager.Instance.m_globalSfx.PlaySFX (4);
-        MySceneManager.Instance.ShowHUBScreen();
+        MySceneManager.Instance.ShowHUBScreen ();
+        
     }
 
     public void EndGame()
