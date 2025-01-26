@@ -5,12 +5,14 @@ public class PopNeedle : MonoBehaviour, IPlayerController
     public float speed;
     public float stopX;
     public PopBubble bubble;
+    public PopNeedle otherPlayer;
 
     private float currentSpeed;
     private float minX;
     private float maxX;
     private Vector3 startPosition;
     private AudioPlayer audioPlayer;
+    private bool ended;
 
     private void Awake()
     {
@@ -32,10 +34,15 @@ public class PopNeedle : MonoBehaviour, IPlayerController
         currentSpeed = 0;
         transform.position = startPosition;
         audioPlayer = GetComponent<AudioPlayer> ();
+        ended = false;
     }
 
     private void Update()
     {
+        if (ended)
+        {
+            return;
+        }
         transform.Translate(currentSpeed * Time.deltaTime, 0, 0, Space.World);
         if (transform.position.x < minX)
         {
@@ -67,7 +74,7 @@ public class PopNeedle : MonoBehaviour, IPlayerController
 
     private void CheckWin()
     {
-        if (bubble.IsPoppable())
+        if (bubble.Pop())
         {
             if (name == "Player 1")
             {
@@ -79,7 +86,8 @@ public class PopNeedle : MonoBehaviour, IPlayerController
             }
 
             AudioManager.Instance.m_globalSfx.PlaySFX (1);
-            MySceneManager.Instance.ShowHUBScreen();
+            ended = true;
+            otherPlayer.ended = true;
         }
     }
 
@@ -89,6 +97,10 @@ public class PopNeedle : MonoBehaviour, IPlayerController
 
     public void OnConfirm()
     {
+        if (ended)
+        {
+            return;
+        }
         if (currentSpeed == 0)
         {
             currentSpeed = speed;

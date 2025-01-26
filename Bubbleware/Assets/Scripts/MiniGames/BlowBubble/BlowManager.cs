@@ -27,4 +27,12 @@ public class BlowManager : MonoBehaviour
         }
         MySceneManager.Instance.ShowHUBScreen();
     }
+
+    public void EndGame()
+    {
+        player1.End();
+        player2.End();
+        StopAllCoroutines();
+        StartCoroutine(CloseTheGameAsync(1));
+    }
 }
