@@ -18,12 +18,13 @@ public class IntroCutsceneManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void OnEnable ()
     {
-        HideImages();
+        HideImages ();
         visibleImageIndex = 0;
-        imagesList[visibleImageIndex].GetComponent<Image>().enabled = true;
-        StartCoroutine(PlayCutsceneAsync(delayBetweenImages));
+        imagesList [visibleImageIndex].GetComponent<Image> ().enabled = true;
+        StartCoroutine (PlayCutsceneAsync (delayBetweenImages));
+        
     }
 
     private IEnumerator PlayCutsceneAsync(float delay)

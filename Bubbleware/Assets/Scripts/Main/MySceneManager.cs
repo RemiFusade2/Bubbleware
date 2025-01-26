@@ -180,24 +180,30 @@ public class MySceneManager : MonoBehaviour
     {
         HideAllScenes();
         SetAllObjectsInSceneActive(IntroCutscene, true);
+        AudioManager.Instance.StopMusic ();
+        AudioManager.Instance.OnSceneActivated ("IntroCutscene");
+        //AudioManager.Instance.PlayMusic (Resources.Load<AudioClip> ("Audio/IntroMusic/test"));
     }
 
     public void ShowHUBScreen()
     {
         HideAllScenes();
         SetAllObjectsInSceneActive(GameHUBScreen, true);
+        AudioManager.Instance.StopMusic ();
     }
 
     public void ShowOutroCutscene()
     {
         HideAllScenes();
         SetAllObjectsInSceneActive(OutroCutscene, true);
+        AudioManager.Instance.StopMusic ();
     }
 
     public void ShowScoreSceen()
     {
         HideAllScenes();
         SetAllObjectsInSceneActive(ScoreScreen, true);
+        AudioManager.Instance.StopMusic ();
     }
 
 
@@ -213,5 +219,7 @@ public class MySceneManager : MonoBehaviour
         lastMiniGamePlayedIndex = miniGameIndex;
         Scene MiniGame = MiniGamesSceneList[miniGameIndex];
         SetAllObjectsInSceneActive(MiniGame, true);
+        AudioManager.Instance.StopMusic ();
+        AudioManager.Instance.OnSceneActivated (MiniGame.name);
     }
 }
