@@ -84,6 +84,10 @@ public class PopBubble : MonoBehaviour
     private IEnumerator CloseTheGameAsync(float delay)
     {
         yield return new WaitForSeconds(delay);
+        if (!ended)
+        {
+            //no winner
+        }
         MySceneManager.Instance.ShowHUBScreen();
     }
 }

@@ -19,9 +19,6 @@ public class AudioManager : MonoBehaviour
 
     public AudioPlayer m_globalSfx = null;
 
-    //[Header ("Audio Clips")]
-    //public AudioClip [] sceneMusicClips; // Array to store music clips for each scene
-
     [Header ("Audio Clips")]
     public List<SceneAudioMapping> sceneAudioMappings; // List of scene-to-audio mappings
 
@@ -38,26 +35,8 @@ public class AudioManager : MonoBehaviour
         {
             Destroy (gameObject);
         }
-
-        // Start a coroutine to monitor the active scene
-        StartCoroutine (CheckActiveScene ());
     }
 
-        // Coroutine to monitor the active scene
-    private IEnumerator CheckActiveScene ()
-    {
-        while (true)
-        {
-            string activeSceneName = GetActiveSceneName ();
-            if (activeSceneName != currentActiveSceneName)
-            {
-                currentActiveSceneName = activeSceneName;
-                OnSceneActivated (activeSceneName);
-            }
-
-            yield return new WaitForSeconds (0.5f); // Check every 0.5 seconds
-        }
-    }
 
     // Called when a new scene is detected as active
     public void OnSceneActivated (string sceneName)
@@ -74,20 +53,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Get the active scene name based on active root GameObjects
-    private string GetActiveSceneName ()
-    {
-        foreach (var mapping in sceneAudioMappings)
-        {
-            if (mapping.sceneRootObject != null && mapping.sceneRootObject.activeInHierarchy)
-            {
-                return mapping.sceneName;
-            }
-        }
-
-        return ""; // No active scene detected
-    }
-
     // Get the music clip for the active scene
     private AudioClip GetMusicClipForScene (string sceneName)
     {
@@ -101,17 +66,6 @@ public class AudioManager : MonoBehaviour
 
         return null; // No matching clip found
     }
-
-
-    //// Listen for scene changes
-    //SceneManager.sceneLoaded += OnSceneLoaded;
-
-
-//private void OnSceneLoaded (Scene scene, LoadSceneMode mode)
-//{
-//    // Change the music based on the scene loaded
-//    PlayMusicForScene (scene.name);
-//}
 
 
 // Play a looping background music track
@@ -147,35 +101,7 @@ public void PlayMusic (AudioClip clip)
     public void SetSFXVolume (float volume) => m_sfxMixerGroup.audioMixer.SetFloat ("SFXVolume", Mathf.Log10 (volume) * 20);
     public void SetAmbientVolume (float volume) => m_ambientMixerGroup.audioMixer.SetFloat ("AmbientVolume", Mathf.Log10 (volume) * 20);
 
-    //// Method to handle the music change based on the scene name
-    //private void PlayMusicForScene (string sceneName)
-    //{
-    //    AudioClip musicClip = GetMusicClipForScene (sceneName);
-    //    if (musicClip != null)
-    //    {
-    //        PlayMusic (musicClip);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning ("No music clip found for scene: " + sceneName);
-    //    }
-    //}
-
-    //// Get music clip based on the scene name
-    //private AudioClip GetMusicClipForScene (string sceneName)
-    //{
-    //    // Iterate through the sceneMusicClips array and return the correct clip for the scene
-    //    foreach (var clip in sceneMusicClips)
-    //    {
-    //        if (clip.name == sceneName)  // matches the scene names
-    //        {
-    //            return clip;
-    //        }
-    //    }
-
-    //    return null;  // Return null if no matching clip is found
-    //}
-
+    
 // Helper class for scene-to-audio mapping
 [System.Serializable]
 public class SceneAudioMapping
@@ -185,9 +111,5 @@ public class SceneAudioMapping
     public AudioClip musicClip;          // Music clip for the scene
 }
 
-//private void OnDestroy ()
-//    {
-//        // Unsubscribe from the scene change event
-//        SceneManager.sceneLoaded -= OnSceneLoaded;
-//    }
+
 }

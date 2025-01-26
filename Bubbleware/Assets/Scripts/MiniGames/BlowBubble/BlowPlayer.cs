@@ -20,13 +20,14 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
         scale = bubble.localScale.x;
         pop = bubble.GetComponent<VisualEffect>();
         bubbleMesh = bubble.GetComponent<MeshRenderer>();
+        audioPlayer = GetComponent<AudioPlayer> ();
+
     }
 
     private void OnEnable()
     {
         Count = 0;
         SetScale();
-        audioPlayer = GetComponent<AudioPlayer>();
         pop.Stop();
         bubbleMesh.enabled = true;
         ended = false;
@@ -54,6 +55,7 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
         {
             bubbleMesh.enabled = false;
             pop.Play();
+            AudioManager.Instance.m_globalSfx.PlaySFX (0);
             blowManager.EndGame();
         }
     }

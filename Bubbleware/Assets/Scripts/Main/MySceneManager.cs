@@ -205,6 +205,7 @@ public class MySceneManager : MonoBehaviour
         HideAllScenes();
         SetAllObjectsInSceneActive(GameHUBScreen, true);
         AudioManager.Instance.StopMusic ();
+        AudioManager.Instance.OnSceneActivated ("GamesHUB");
     }
 
     public void ShowOutroCutscene()

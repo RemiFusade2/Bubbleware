@@ -23,10 +23,14 @@ public class TimerManager : MonoBehaviour
 
     public int displayPlayerWinsPanel;
 
+    private AudioPlayer audioPlayer;
+
     private void OnEnable()
     {
         HideNumbers();
         HidePlayerWinTexts();
+        audioPlayer = GetComponent<AudioPlayer> ();
+
         if (displayPlayerWinsPanel != -1)
         {
             StartCoroutine(ShowPlayerWinsPanel(delayPlayerWinsPanel));
@@ -73,6 +77,7 @@ public class TimerManager : MonoBehaviour
             // Game is not over, we show timer
             numberIndex = 0;
             DisplayTimer();
+            audioPlayer.PlaySFX (numberIndex);
             StartCoroutine(DecrementTimerAsync(delayBetweenNumbers));
         }
     }
@@ -119,11 +124,21 @@ public class TimerManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(delay);
         if (numberIndex >= numbersList.Count-1)
         {
+            audioPlayer.PlaySFX (numberIndex);
             StartNewMiniGame();
         }
         else
         {
             numberIndex++;
+            audioPlayer.PlaySFX (numberIndex);
+
+            //if (numberIndex == 0)
+            //    audioPlayer.PlaySFX (0);
+            //else if (numberIndex == 1) 
+            //    audioPlayer.PlaySFX (1);
+            //else if (numberIndex == 2) 
+            //    audioPlayer.PlaySFX (2);
+
             DisplayTimer();
             StartCoroutine(DecrementTimerAsync(delayBetweenNumbers));
         }
