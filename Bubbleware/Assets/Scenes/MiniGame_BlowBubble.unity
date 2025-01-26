@@ -301,6 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 938484455}
   - component: {fileID: 938484456}
+  - component: {fileID: 938484457}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -339,6 +340,21 @@ MonoBehaviour:
   goal: 50
   bubble: {fileID: 1962931509}
   scaleMultiplier: 0.1
+--- !u!114 &938484457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938484454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4757650136f79114798b1dc632c36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClips:
+  - {fileID: 8300000, guid: d30fdc6366415a045a3ddd13e19a2ef3, type: 3}
+  is3D: 0
 --- !u!1 &1386327936
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1386327937}
   - component: {fileID: 1386327938}
+  - component: {fileID: 1386327939}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -387,6 +404,21 @@ MonoBehaviour:
   goal: 50
   bubble: {fileID: 812039803}
   scaleMultiplier: 0.1
+--- !u!114 &1386327939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386327936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4757650136f79114798b1dc632c36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClips:
+  - {fileID: 8300000, guid: 06676225d2566004ea873aa687278bef, type: 3}
+  is3D: 0
 --- !u!1 &1558858342
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,11 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
 {
     public int goal;
     public Transform bubble;
-    public float scaleMultiplier;
+    public float scaleMultiplier;    
 
     public int Count {get; private set;}
     private float scale;
+    private AudioPlayer audioPlayer;
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
     {
         Count = 0;
         SetScale();
+        audioPlayer = GetComponent<AudioPlayer>();
     }
 
     public void Move(Vector2 moveVector)
@@ -32,8 +34,11 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
     {
         Count++;
         SetScale();
+        audioPlayer.PlaySFX (0);
+
         if (Count >= goal)
         {
+
             if (name == "Player 1")
             {
                 GameManager.Instance.PlayerOneWon();

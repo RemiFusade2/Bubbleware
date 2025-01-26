@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource m_musicSource = null;
     public AudioSource m_ambientSource = null;
 
+    public AudioPlayer m_globalSfx = null;
+
     //[Header ("Audio Clips")]
     //public AudioClip [] sceneMusicClips; // Array to store music clips for each scene
 
