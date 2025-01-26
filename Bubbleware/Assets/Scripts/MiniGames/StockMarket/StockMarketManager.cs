@@ -16,6 +16,9 @@ public class StockMarketManager : MonoBehaviour
     public ParticleSystem buyParticleSystem;
     public ParticleSystem sellParticleSystem;
     public VisualEffect buyVisualEffect;
+    [Space]
+    public TMP_Text bubblecoinNameText;
+    public TMP_Text bubblecoinPriceText;
 
     [Header("Settings")]
     public float delayBetweenNewValues = 0.1f;
@@ -109,6 +112,8 @@ public class StockMarketManager : MonoBehaviour
         lineRenderer.positionCount = positionCount;
         lineRenderer.SetPosition(positionCount-1, new Vector3(lastTime, lastValue, 0));
 
+        bubblecoinPriceText.text = $"US$ {(lastValue*1000).ToString("0.00")}";
+
         // Move camera, center on latest value and make it smooth
         Vector3 targetCameraPosition = new Vector3(lastTime, lastValue, -10);
         stockMarketCamera.position = Vector3.Lerp(stockMarketCamera.position, targetCameraPosition, 0.25f);
@@ -119,12 +124,13 @@ public class StockMarketManager : MonoBehaviour
             float valueTrend = lineRenderer.GetPosition(positionCount - 1).y - lineRenderer.GetPosition(positionCount - 50).y;
             lineRenderer.startColor = (valueTrend < 0) ? Color.red : Color.green;
             lineRenderer.endColor = (valueTrend < 0) ? Color.red : Color.green;
+            bubblecoinNameText.color = (valueTrend < 0) ? Color.red : Color.green;
+            bubblecoinPriceText.color = (valueTrend < 0) ? Color.red : Color.green;
         }
-
         followStockMarketValueObject.transform.position = new Vector3(lastTime, lastValue, 0);
     }
 
-    public void P1Sell(Transform playerTransform)
+    public bool P1Sell(Transform playerTransform)
     {
         if (gameIsRunning)
         {
@@ -132,8 +138,9 @@ public class StockMarketManager : MonoBehaviour
             p1Score = lastValue;
             playerTransform.position = new Vector3(lastTime, lastValue, 0);
         }
+        return gameIsRunning;
     }
-    public void P2Sell(Transform playerTransform)
+    public bool P2Sell(Transform playerTransform)
     {
         if (gameIsRunning)
         {
@@ -141,6 +148,7 @@ public class StockMarketManager : MonoBehaviour
             p2Score = lastValue;
             playerTransform.position = new Vector3(lastTime, lastValue, 0);
         }
+        return gameIsRunning;
     }
 
     private IEnumerator StopTheGameAsync(float delay)

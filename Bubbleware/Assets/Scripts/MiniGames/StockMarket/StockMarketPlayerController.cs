@@ -40,13 +40,13 @@ public class StockMarketPlayerController : MonoBehaviour, IPlayerController
     {
         if (playerID == 1)
         {
-            stockMarketManager.P1Sell(this.transform);
-            this.GetComponent<SpriteRenderer>().enabled = true;
+            bool sellWorked = stockMarketManager.P1Sell(this.transform);
+            this.GetComponent<SpriteRenderer>().enabled = sellWorked;
         }
         else
         {
-            stockMarketManager.P2Sell(this.transform);
-            this.GetComponent<SpriteRenderer>().enabled = true;
+            bool sellWorked = stockMarketManager.P2Sell(this.transform);
+            this.GetComponent<SpriteRenderer>().enabled = sellWorked;
         }
     }
 }
