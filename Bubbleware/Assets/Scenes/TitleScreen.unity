@@ -990,6 +990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxClips:
   - {fileID: 8300000, guid: d5f4ff8e221b9a548a5ed68b58698e3b, type: 3}
+  - {fileID: 8300000, guid: e76bb107ec022644a9d2730a2e7ad0e9, type: 3}
   is3D: 0
 --- !u!1 &832575517
 GameObject:

@@ -10,6 +10,7 @@ public class PopNeedle : MonoBehaviour, IPlayerController
     private float minX;
     private float maxX;
     private Vector3 startPosition;
+    private AudioPlayer audioPlayer;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class PopNeedle : MonoBehaviour, IPlayerController
     {
         currentSpeed = 0;
         transform.position = startPosition;
+        audioPlayer = GetComponent<AudioPlayer> ();
     }
 
     private void Update()
@@ -75,6 +77,8 @@ public class PopNeedle : MonoBehaviour, IPlayerController
             {
                 GameManager.Instance.PlayerTwoWon();
             }
+
+            AudioManager.Instance.m_globalSfx.PlaySFX (1);
             MySceneManager.Instance.ShowHUBScreen();
         }
     }
@@ -88,6 +92,7 @@ public class PopNeedle : MonoBehaviour, IPlayerController
         if (currentSpeed == 0)
         {
             currentSpeed = speed;
+            audioPlayer.PlaySFX (0);
         }
     }
 
