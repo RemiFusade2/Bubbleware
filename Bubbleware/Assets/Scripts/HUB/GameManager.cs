@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     [Header("Settings")]
     public int targetScore = 5;
 
-    private int player1Score;
-    private int player2Score;
+    public int player1Score;
+    public int player2Score;
 
     private void Awake()
     {
@@ -48,14 +48,14 @@ public class GameManager : MonoBehaviour
     {
         player1Score++;
         timerManager.displayPlayerWinsPanel = 1;
-        AudioManager.Instance.m_globalSfx.PlaySFX (5);
+        AudioManager.Instance.m_globalSfx.PlaySFX(6);
         DisplayScores ();
     }
     public void PlayerTwoWon()
     {
         player2Score++;
         timerManager.displayPlayerWinsPanel = 2;
-        AudioManager.Instance.m_globalSfx.PlaySFX (6);
+        AudioManager.Instance.m_globalSfx.PlaySFX(5);
         DisplayScores ();
     }
 
