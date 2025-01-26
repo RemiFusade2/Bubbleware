@@ -957,7 +957,7 @@ MonoBehaviour:
     musicClip: {fileID: 8300000, guid: 57f3870cfd8272948b4f31e06cbe6c5b, type: 3}
   - sceneName: MiniGame_StockMarket
     sceneRootObject: {fileID: 0}
-    musicClip: {fileID: 0}
+    musicClip: {fileID: 8300000, guid: 8c8a2c5cfcfe7f74696dcd8a0ab0ba3b, type: 3}
   - sceneName: MiniGame_BlowBubble
     sceneRootObject: {fileID: 0}
     musicClip: {fileID: 8300000, guid: ce3d548cb2415bb48b2f378ba53372f6, type: 3}
