@@ -1,6 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.VFX;
 
 public class PopBubble : MonoBehaviour
 {
@@ -14,10 +15,15 @@ public class PopBubble : MonoBehaviour
     private float direction;
     private Vector3 startPostition;
     private float switchCountdown;
+    private VisualEffect pop;
+    private MeshRenderer bubble;
+    private bool ended;
 
     private void Awake()
     {
         startPostition = transform.position;
+        pop = GetComponent<VisualEffect>();
+        bubble = GetComponent<MeshRenderer>();
     }
 
     private void OnEnable()
@@ -26,10 +32,17 @@ public class PopBubble : MonoBehaviour
         transform.position = startPostition;
         StartCoroutine(CloseTheGameAsync(10));
         RandomizeSwitchCountdown();
+        pop.Stop();
+        bubble.enabled = true;
+        ended = false;
     }
 
     private void Update()
     {
+        if (ended)
+        {
+            return;
+        }
         switchCountdown -= Time.deltaTime;
         if (switchCountdown <= 0)
         {
@@ -49,9 +62,18 @@ public class PopBubble : MonoBehaviour
         }
     }
 
-    public bool IsPoppable()
+    public bool Pop()
     {
-        return math.abs(0 - transform.position.y) < popRange;
+        bool poppable = math.abs(0 - transform.position.y) < popRange;
+        if (poppable)
+        {
+            ended = true;
+            bubble.enabled = false;
+            pop.Play();
+            StopAllCoroutines();
+            StartCoroutine(CloseTheGameAsync(1));
+        }
+        return poppable;
     }
 
     private void RandomizeSwitchCountdown()

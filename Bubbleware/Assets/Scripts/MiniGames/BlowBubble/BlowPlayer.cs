@@ -1,18 +1,25 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class BlowPlayer : MonoBehaviour, IPlayerController
 {
     public int goal;
     public Transform bubble;
-    public float scaleMultiplier;    
+    public float scaleMultiplier;
+    public BlowManager blowManager;
 
     public int Count {get; private set;}
     private float scale;
     private AudioPlayer audioPlayer;
+    private VisualEffect pop;
+    private MeshRenderer bubbleMesh;
+    private bool ended;
 
     private void Awake()
     {
         scale = bubble.localScale.x;
+        pop = bubble.GetComponent<VisualEffect>();
+        bubbleMesh = bubble.GetComponent<MeshRenderer>();
     }
 
     private void OnEnable()
@@ -20,6 +27,9 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
         Count = 0;
         SetScale();
         audioPlayer = GetComponent<AudioPlayer>();
+        pop.Stop();
+        bubbleMesh.enabled = true;
+        ended = false;
     }
 
     public void Move(Vector2 moveVector)
@@ -32,22 +42,19 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
 
     public void OnConfirm()
     {
+        if (ended)
+        {
+            return;
+        }
         Count++;
         SetScale();
         audioPlayer.PlaySFX (0);
 
         if (Count >= goal)
         {
-
-            if (name == "Player 1")
-            {
-                GameManager.Instance.PlayerOneWon();
-            }
-            else
-            {
-                GameManager.Instance.PlayerTwoWon();
-            }
-            MySceneManager.Instance.ShowHUBScreen();
+            bubbleMesh.enabled = false;
+            pop.Play();
+            blowManager.EndGame();
         }
     }
 
@@ -56,5 +63,10 @@ public class BlowPlayer : MonoBehaviour, IPlayerController
         float newScale = scale + Count * scaleMultiplier;
         bubble.localScale = new Vector3(newScale, newScale, newScale);
         bubble.localPosition = new Vector3(newScale / 2, bubble.localPosition.y, bubble.localPosition.z);
+    }
+
+    public void End()
+    {
+        ended = true;
     }
 }
