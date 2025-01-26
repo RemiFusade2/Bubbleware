@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class IntroCutsceneManager : MonoBehaviour
 {
-    public List<GameObject> imagesList;
-    public float delayBetweenImages;
+    //public List<GameObject> imagesList;
+    //public float delayBetweenImages;
 
-    private int visibleImageIndex;
+    //private int visibleImageIndex;
 
+    /*
     private void HideImages()
     {
         foreach (GameObject image in imagesList)
@@ -21,12 +22,13 @@ public class IntroCutsceneManager : MonoBehaviour
     private void OnEnable ()
     {
         HideImages ();
-        visibleImageIndex = 0;
-        imagesList [visibleImageIndex].GetComponent<Image> ().enabled = true;
-        StartCoroutine (PlayCutsceneAsync (delayBetweenImages));
+        //visibleImageIndex = 0;
+        //imagesList [visibleImageIndex].GetComponent<Image> ().enabled = true;
+        //StartCoroutine (PlayCutsceneAsync (delayBetweenImages));
         
-    }
+    }*/
 
+    /*
     private IEnumerator PlayCutsceneAsync(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -42,5 +44,10 @@ public class IntroCutsceneManager : MonoBehaviour
         {
             MySceneManager.Instance.ShowHUBScreen();
         }
+    }*/
+
+    public void EndCutscene()
+    {
+        MySceneManager.Instance.ShowHUBScreen();
     }
 }
