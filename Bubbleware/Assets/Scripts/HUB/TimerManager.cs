@@ -4,9 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class TimerManager : MonoBehaviour
 {
+    public Transform konfettiParent;
+
     public List<GameObject> numbersList;
 
     public GameObject tie;
@@ -14,6 +17,7 @@ public class TimerManager : MonoBehaviour
     public GameObject player2Wins;
 
     public int delayBetweenNumbers = 1;
+    public int delayPlayerWinsPanel = 2;
 
     private int numberIndex;
 
@@ -25,11 +29,30 @@ public class TimerManager : MonoBehaviour
         HidePlayerWinTexts();
         if (displayPlayerWinsPanel != -1)
         {
-            StartCoroutine(ShowPlayerWinsPanel(delayBetweenNumbers));
+            StartCoroutine(ShowPlayerWinsPanel(delayPlayerWinsPanel));
         }
         else
         {
             EndRound();
+        }
+
+        foreach (Transform konfettiChild in konfettiParent)
+        {
+            if (konfettiChild.gameObject.activeInHierarchy)
+            {
+                konfettiChild.GetComponent<VisualEffect>().Stop();
+            }
+        }
+    }
+
+    private void PlayKonfettis()
+    {
+        foreach (Transform konfettiChild in konfettiParent)
+        {
+            if (konfettiChild.gameObject.activeInHierarchy)
+            {
+                konfettiChild.GetComponent<VisualEffect>().Play();
+            }
         }
     }
 
@@ -70,13 +93,16 @@ public class TimerManager : MonoBehaviour
 
     private IEnumerator ShowPlayerWinsPanel(float delay)
     {
+        yield return new WaitForEndOfFrame();
         if (displayPlayerWinsPanel == 1)
         {
             player1Wins.SetActive(true);
+            PlayKonfettis();
         }
         else if (displayPlayerWinsPanel == 2)
         {
             player2Wins.SetActive(true);
+            PlayKonfettis();
         }
         else
         {
