@@ -1,7 +1,7 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 public class StockMarketManager : MonoBehaviour
@@ -11,10 +11,9 @@ public class StockMarketManager : MonoBehaviour
     public GameObject startPanel;
     public TMP_Text p1ScoreText;
     public TMP_Text p2ScoreText;
+    public ScrollRect leftNumbersScrollview;
     [Space]
     public GameObject followStockMarketValueObject;
-    public ParticleSystem buyParticleSystem;
-    public ParticleSystem sellParticleSystem;
     public VisualEffect buyVisualEffect;
     [Space]
     public TMP_Text bubblecoinNameText;
@@ -109,6 +108,10 @@ public class StockMarketManager : MonoBehaviour
         positionCount++;
         lastTime += deltaTime;
         lastValue += Random.Range(trendMin, trendMax);
+
+        Vector2 targetScrollViewPosition = Vector2.up * (2300 + lastValue * -100);
+        leftNumbersScrollview.content.anchoredPosition = Vector2.Lerp(leftNumbersScrollview.content.anchoredPosition, targetScrollViewPosition, 0.1f);
+
         lineRenderer.positionCount = positionCount;
         lineRenderer.SetPosition(positionCount-1, new Vector3(lastTime, lastValue, 0));
 
