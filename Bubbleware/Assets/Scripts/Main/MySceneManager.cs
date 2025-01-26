@@ -55,6 +55,21 @@ public class MySceneManager : MonoBehaviour
             LoadScenes();
         }
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ShowMiniGame(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ShowMiniGame(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ShowMiniGame(2);
+        }
+    }
 
     private void LoadScenes()
     {
@@ -210,17 +225,21 @@ public class MySceneManager : MonoBehaviour
 
     public void ShowRandomMiniGame()
     {
-        HideAllScenes();
-
         // Pick mini game
         int miniGameIndex;
         do {
             miniGameIndex = UnityEngine.Random.Range(0, MiniGamesSceneList.Count);
         } while (miniGameIndex == lastMiniGamePlayedIndex);
+        ShowMiniGame(miniGameIndex);
+    }
+
+    public void ShowMiniGame(int miniGameIndex)
+    {
+        HideAllScenes();
         lastMiniGamePlayedIndex = miniGameIndex;
         Scene MiniGame = MiniGamesSceneList[miniGameIndex];
         SetAllObjectsInSceneActive(MiniGame, true);
-        AudioManager.Instance.StopMusic ();
-        AudioManager.Instance.OnSceneActivated (MiniGame.name);
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.OnSceneActivated(MiniGame.name);
     }
 }
