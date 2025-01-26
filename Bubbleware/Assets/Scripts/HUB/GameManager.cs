@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public TMP_Text player1ScoreText;
     public TMP_Text player2ScoreText;
 
+    public Transform P1BubblesParent;
+    public Transform P2BubblesParent;
+
     public TMP_Text targetScoreText;
 
     public TimerManager timerManager;
@@ -56,9 +59,18 @@ public class GameManager : MonoBehaviour
 
     private void DisplayScores()
     {
-        player1ScoreText.text = $"P1\n{player1Score}";
-        player2ScoreText.text = $"P2\n{player2Score}";
-        targetScoreText.text = $"{targetScore} point to win";
+        int scoreCount = 0;
+        foreach (Transform P1BubbleChild in P1BubblesParent)
+        {
+            P1BubbleChild.gameObject.SetActive((scoreCount >= player1Score));
+            scoreCount++;
+        }
+        scoreCount = 0;
+        foreach (Transform P2BubbleChild in P2BubblesParent)
+        {
+            P2BubbleChild.gameObject.SetActive((scoreCount >= player2Score));
+            scoreCount++;
+        }
     }
 
     public bool IsGameOver()
