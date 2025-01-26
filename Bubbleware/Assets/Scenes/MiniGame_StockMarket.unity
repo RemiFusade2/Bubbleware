@@ -1004,6 +1004,7 @@ GameObject:
   - component: {fileID: 949266254}
   - component: {fileID: 949266255}
   - component: {fileID: 949266256}
+  - component: {fileID: 949266257}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -1095,6 +1096,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stockMarketManager: {fileID: 45860856}
   playerID: 1
+--- !u!114 &949266257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949266253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4757650136f79114798b1dc632c36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClips:
+  - {fileID: 8300000, guid: 2a95a73945b4c4044b98211b33844489, type: 3}
+  is3D: 0
 --- !u!1 &992432210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,7 +1228,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.2
+  m_fontSize: 31.95
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1275,6 +1291,7 @@ GameObject:
   - component: {fileID: 1179150615}
   - component: {fileID: 1179150618}
   - component: {fileID: 1179150619}
+  - component: {fileID: 1179150620}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -1366,6 +1383,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stockMarketManager: {fileID: 45860856}
   playerID: 2
+--- !u!114 &1179150620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179150614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4757650136f79114798b1dc632c36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClips:
+  - {fileID: 8300000, guid: 67919542919bd3d4db007f4cc9f9cf55, type: 3}
+  is3D: 0
 --- !u!1 &1183145111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,7 +1596,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.2
+  m_fontSize: 31.95
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2516,7 +2548,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.75
+  m_fontSize: 29.05
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1

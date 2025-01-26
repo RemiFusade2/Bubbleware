@@ -13,9 +13,13 @@ public class StockMarketPlayerController : MonoBehaviour, IPlayerController
 
     public int playerID;
 
+    private AudioPlayer audioPlayer;
+
+
     private void OnEnable()
     {
         this.GetComponent<SpriteRenderer>().enabled = false;
+        audioPlayer = GetComponent<AudioPlayer> ();
     }
 
     public void Move(Vector2 moveVector)
@@ -48,5 +52,8 @@ public class StockMarketPlayerController : MonoBehaviour, IPlayerController
             bool sellWorked = stockMarketManager.P2Sell(this.transform);
             this.GetComponent<SpriteRenderer>().enabled = sellWorked;
         }
+
+        audioPlayer.PlaySFX (0);
+
     }
 }

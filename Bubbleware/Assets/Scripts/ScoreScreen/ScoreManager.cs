@@ -13,5 +13,7 @@ public class ScoreManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         MySceneManager.Instance.ShowTitleScreen();
+        AudioManager.Instance.StopMusic ();
+        AudioManager.Instance.OnSceneActivated ("TitleScreen");
     }
 }

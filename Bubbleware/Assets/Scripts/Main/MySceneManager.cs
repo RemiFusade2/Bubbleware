@@ -204,6 +204,7 @@ public class MySceneManager : MonoBehaviour
         HideAllScenes();
         SetAllObjectsInSceneActive(ScoreScreen, true);
         AudioManager.Instance.StopMusic ();
+        AudioManager.Instance.m_globalSfx.PlaySFX (2);
     }
 
 

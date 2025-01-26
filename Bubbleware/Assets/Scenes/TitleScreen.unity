@@ -661,6 +661,7 @@ GameObject:
   - component: {fileID: 374813629}
   - component: {fileID: 374813628}
   - component: {fileID: 374813630}
+  - component: {fileID: 374813631}
   m_Layer: 5
   m_Name: Player 1
   m_TagString: Untagged
@@ -737,6 +738,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419d4f797c8a3274da23c50dcbb8a773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &374813631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374813626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4757650136f79114798b1dc632c36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClips:
+  - {fileID: 8300000, guid: 59089b7d97b71a44f90ce03b2ad26cd5, type: 3}
+  is3D: 0
 --- !u!1 &399457878
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +1007,8 @@ MonoBehaviour:
   sfxClips:
   - {fileID: 8300000, guid: d5f4ff8e221b9a548a5ed68b58698e3b, type: 3}
   - {fileID: 8300000, guid: e76bb107ec022644a9d2730a2e7ad0e9, type: 3}
+  - {fileID: 8300000, guid: 0f02e9b8845727f4495008ee9c65a281, type: 3}
+  - {fileID: 8300000, guid: 8d6ff9dac72b8a14e8687a923189b87e, type: 3}
   is3D: 0
 --- !u!1 &832575517
 GameObject:
@@ -1053,6 +1071,7 @@ GameObject:
   - component: {fileID: 1017734782}
   - component: {fileID: 1017734781}
   - component: {fileID: 1017734783}
+  - component: {fileID: 1017734784}
   m_Layer: 5
   m_Name: Player 2
   m_TagString: Untagged
@@ -1129,6 +1148,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419d4f797c8a3274da23c50dcbb8a773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1017734784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017734779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4757650136f79114798b1dc632c36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClips:
+  - {fileID: 8300000, guid: 59089b7d97b71a44f90ce03b2ad26cd5, type: 3}
+  is3D: 0
 --- !u!1 &1164837361
 GameObject:
   m_ObjectHideFlags: 0
