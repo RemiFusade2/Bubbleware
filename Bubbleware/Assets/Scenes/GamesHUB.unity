@@ -314,7 +314,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.2
+  m_fontSize: 31.95
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.25
+  m_fontSize: 56.2
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1632,7 +1632,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.25
+  m_fontSize: 56.2
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1694,6 +1694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2036479972}
   - component: {fileID: 2036479973}
+  - component: {fileID: 2036479974}
   m_Layer: 0
   m_Name: TimerManager
   m_TagString: Untagged
@@ -1738,6 +1739,24 @@ MonoBehaviour:
   player2Wins: {fileID: 419268145}
   delayBetweenNumbers: 1
   displayPlayerWinsPanel: 0
+--- !u!114 &2036479974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036479971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4757650136f79114798b1dc632c36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClips:
+  - {fileID: 8300000, guid: bc0e2af044e248a499d74f6e750fcb2f, type: 3}
+  - {fileID: 8300000, guid: 552881c753d4c854faeed10f034e21da, type: 3}
+  - {fileID: 8300000, guid: fec6852488147734f90fd49c270d6150, type: 3}
+  - {fileID: 8300000, guid: e86b10a96effe5f42813572cc43fb928, type: 3}
+  is3D: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
