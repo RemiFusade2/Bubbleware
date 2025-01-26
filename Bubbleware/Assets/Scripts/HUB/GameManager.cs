@@ -45,13 +45,15 @@ public class GameManager : MonoBehaviour
     {
         player1Score++;
         timerManager.displayPlayerWinsPanel = 1;
-        DisplayScores();
+        AudioManager.Instance.m_globalSfx.PlaySFX (5);
+        DisplayScores ();
     }
     public void PlayerTwoWon()
     {
         player2Score++;
         timerManager.displayPlayerWinsPanel = 2;
-        DisplayScores();
+        AudioManager.Instance.m_globalSfx.PlaySFX (6);
+        DisplayScores ();
     }
 
     private void DisplayScores()
